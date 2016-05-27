@@ -1,0 +1,12 @@
+<html>
+<head>
+  <title>{{ @title }}</title>
+  <link rel="stylesheet" href="/ui/css/base.css" type="text/css" />
+  <script type="text/javascript" src="/ui/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/ui/js/jquery.noty.packaged.min.js"></script>
+  <include if="{{ @jsnoty }}" href="{{ @jsnoty }}" />
+</head>
+<body>
+<include href="{{ @content }}" />
+</body>
+</html>

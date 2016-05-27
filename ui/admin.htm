@@ -1,0 +1,35 @@
+<div id="background"> </div>
+<div id="wrapper">
+  <div id="admin-wrapper">
+    <div class="center-title">{{ @title }}</div>
+    <div>
+      <form action="/admin/database/import" enctype="multipart/form-data" method="post">
+        <input name="file" type="file" />
+        <button type="submit" name="submit" value="database_import">Database Import</button>
+      </form>
+    </div>
+    <div>
+      <form action="/admin/database/export" method="post">
+        <button type="submit" name="submit" value="database_export">Database Export</button>
+      </form>
+    </div>
+    <div>
+      <form action="/admin/database/truncate" method="post">
+        <button type="submit" name="submit" value="database_truncate">Database Truncate</button>
+      </form>
+    </div>
+    <div>
+      <form action="/admin/database/optimize" method="post">
+        <button type="submit" name="submit" value="database_optimize">Database Optimize</button>
+      </form>
+    </div>
+    <div>
+      <form action="/admin/print/test" method="post">
+        <button type="submit" name="submit" value="print_test_label">Print Test Label</button>
+      </form>
+    </div>
+    <div class="center">
+      <a href="/checkin"> home </a>
+    </div>
+  </div>
+</div>
