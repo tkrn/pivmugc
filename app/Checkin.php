@@ -4,7 +4,7 @@ class Checkin {
 
   // define page specifics
   private $title = 'Welcome to the VMUG Meetup! - PiVMUGc';
-  private $sqlcmd = 'SELECT * FROM view_pregistered_not_checked_in ORDER BY lastname';
+  private $sqlcmd = 'SELECT * FROM view_pregistered_not_checked_in ORDER BY lastname COLLATE NOCASE';
   private $content = 'index.htm';
   private $layout = 'layout-default.htm';
 
