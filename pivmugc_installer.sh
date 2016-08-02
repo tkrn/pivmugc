@@ -4,13 +4,14 @@
 # Raspberry Pi User Group Controller Scirpt Installer
 # URL: https://github.com/tkrn/pivmugc/
 # Release Date: 2016-05-27
-# Verion: 2.0
+# Verion: 2.1
 
 #
 # Start Variables
 #
 
 DYMOURL="http://download.dymo.com/Software/Linux/dymo-cups-drivers-1.4.0.tar.gz"
+PIVMUGCURL="https://github.com/tkrn/pivmugc/archive/master.zip"
 
 #
 # End Variables
@@ -83,14 +84,12 @@ NGINX_CONF='server {
 
 INTERFACES='# interfaces(5) file used by ifup(8) and ifdown(8)\n\n# Please note that this file is written to be used with dhcpcd\n# For static IP, consult /etc/dhcpcd.conf and "man dhcpcd.conf"\n\n# Include files from /etc/network/interfaces.d:\nsource-directory /etc/network/interfaces.d\n\nauto lo\niface lo inet loopback\n\niface eth0 inet manual\n\niface wlan0 inet static\naddress 10.0.0.1\nnetwork 10.0.0.0\nnetmask 255.255.255.0\nbroadcast 10.0.0.255'
 DHCPCD='\n#WLAN0 Configuration\n\ninterface wlan0\nstatic ip_address=10.0.0.1/24\nstatic routers=10.0.0.1\nstatic domain_name_servers=10.0.0.1'
-
 WLAN0_CONF='interface=wlan0\nexpand-hosts\ndomain=local\ndhcp-range=10.0.0.10,10.0.0.50,24h\ndhcp-option=6,10.0.0.1'
-
 HOSTAPD_CONF='# Basic configuration\ndriver=nl80211\ninterface=wlan0\nssid=pivmugc\nhw_mode=g\nchannel=8\nauth_algs=1\n\n# WPA configuration\nwpa=2\nwpa_passphrase=PIVMUGCPASS\nwpa_key_mgmt=WPA-PSK\nwpa_pairwise=TKIP\nrsn_pairwise=CCMP\nwpa_ptk_rekey=600\nmacaddr_acl=0'
-
 HOSTAPD_DEFAULT='DAEMON_CONF="/etc/hostapd/hostapd.conf"'
-
 HOSTNAME=$(hostname)
+SUDOERS='ALL ALL=(root) NOPASSWD: /sbin/shutdown'
+
 exit 0
 echo
 echo -e "\x1B[01;93m PLEASE BE PATIENT! All items are run as a background process. \x1B[0m"
@@ -113,10 +112,13 @@ echo " *** Installing required binaries... "
 apt-get -qq install nginx php5-fpm php5-sqlite -y > /var/tmp/apt-get-install-binaries-2.log
 
 echo " *** Installing required binaries... "
-apt-get -qq install git dnsmasq vim unzip hostapd gawk -y > /var/tmp/apt-get-install-binaries-3.log
+apt-get -qq install unzip dnsmasq vim unzip hostapd gawk -y > /var/tmp/apt-get-install-binaries-3.log
 
 echo " *** Installing development tools... "
 apt-get -qq install build-essential libcups2-dev libcupsimage2-dev -y > /var/tmp/apt-get-install-devel.log
+
+echo " *** Modifying sudoers permissions... "
+echo $SUDOERS >> /etc/sudoers
 
 echo " *** Applying NGINX configuration..."
 mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.orginal
@@ -180,16 +182,18 @@ sed -i 's/localhost/*/' /etc/cups/cupsd.conf
 usermod -a -G lpadmin pi
 service cups restart
 
+echo "*** Installing pivmugc application from github... "
+cd /var/tmp
+wget $PIVMUGCURL
+unzip master.zip
+cd pivmugc-master/
+cp * /usr/local/nginx/html/
+rm /usr/local/nginx/html/pivmugc_installer.sh
+chown www-data:www-data /usr/local/nginx/html/ -R
+
 echo " *** Cleanup RAM_DISK"
 cp /var/tmp/*.log /tmp
 rm /var/tmp/* -r
-
-echo " *** git clone pivmugc... "
-cd /usr/local/nginx/html
-git clone -q https://github.com/tkrn/pivmugc
-mv pivmugc/* .
-rm pivmugc/ -r
-chown www-data:www-data /usr/local/nginx/html/ -R
 
 echo
 echo -e "\x1B[01;93m Please set a default the default printer in CUPS! \x1B[0m"
