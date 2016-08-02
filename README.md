@@ -18,13 +18,19 @@ Start with a clean installation of Raspbian and issue the following commands:
 This method will run apt-get update and install cups, nginx, php, compile Dymo drivers, configure most necessary services and create RAM_DISK a portion of memory used for writing tmp files to for better performance on the Rasberry Pi.
 
 ### Installation Method #2 (Manual)
-Installation is simple. git clone the latest master branch to your web directory and point your web server to the directory. Here is an example for a default NGINX web server.
+Installation is simple. Download the latest master branch, extract the files and move the files into the web directory. Here is an example for a default NGINX web server. The paths will vary for lighttpd or Apache installations.
 
-> git clone https://github.com/tkrn/pivmugc /usr/local/nginx/html
+> cd /tmp
 
-> mv pivmugc/* /usr/local/nginx/html
+> wget https://github.com/tkrn/pivmugc/archive/master.zip
 
-> rm pivmugc/ -rf
+> unzip master.zip
+
+> cd pivmugc-master/
+
+> cp * /usr/local/nginx/html/
+
+> chown www-data:www-data /usr/local/nginx/html/ -R
 
 ### config.ini
 A file that stores global variables.
