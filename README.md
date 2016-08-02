@@ -28,7 +28,7 @@ Installation is simple. Download the latest master branch, extract the files and
 
 > cd pivmugc-master/
 
-> cp * /usr/local/nginx/html/
+> cp -rf * /usr/local/nginx/html/
 
 > chown www-data:www-data /usr/local/nginx/html/ -R
 
