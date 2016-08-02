@@ -131,7 +131,7 @@ usermod -a -G www-data pi
 echo " *** Applying PHP-FPM configuration..."
 service php5-fpm start
 
-echo " *** Configuraing interfaces..."
+echo " *** Configuring interfaces..."
 mv /etc/dhcpcd.conf /etc/dhcpcd.conf.bak
 echo -e $DHCPCD >>/etc/dhcpcd.conf
 num=$(wc -l /etc/rc.local |awk '{print $1}')
@@ -156,7 +156,7 @@ echo -e $HOSTAPD_CONF > /etc/hostapd/hostapd.conf
 echo $HOSTAPD_DEFAULT >> /etc/default/hostapd
 systemctl restart hostapd.service
 
-echo " *** Downloading Dymo drivers (using RAM_DISK)... "
+echo " *** Downloading Dymo drivers... "
 cd /var/tmp
 wget $DYMOURL -q
 
@@ -181,7 +181,7 @@ sed -i 's/localhost/*/' /etc/cups/cupsd.conf
 usermod -a -G lpadmin pi
 service cups restart
 
-echo "*** Installing pivmugc application from github... "
+echo " *** Installing pivmugc application from github... "
 cd /var/tmp
 wget $PIVMUGCURL -q
 unzip -qq master.zip 
