@@ -90,7 +90,6 @@ HOSTAPD_DEFAULT='DAEMON_CONF="/etc/hostapd/hostapd.conf"'
 HOSTNAME=$(hostname)
 SUDOERS='ALL ALL=(root) NOPASSWD: /sbin/shutdown'
 
-exit 0
 echo
 echo -e "\x1B[01;93m PLEASE BE PATIENT! All items are run as a background process. \x1B[0m"
 echo
