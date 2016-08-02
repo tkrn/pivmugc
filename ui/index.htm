@@ -4,13 +4,8 @@
       <form action="/register" method="get">
         <button type="submit">Walk-on Registration</button>
       </form>
-      <form action="/checkin" method="post">
-        <button type="submit" name="submit" value="checkin">Pre-registered Checkin</button>
-        <select id="users-drpdwn" name="id">
-          <repeat group="{{ @result }}" value="{{ @item }}">
-            <option value="{{ @item.id }}">{{ @item.lastname }}, {{ @item.firstname }} - {{ @item.company }}</option>
-          </repeat>
-        </select>
+      <form action="/checkin" method="get">
+        <button type="submit">Preregistered</button>
       </form>
     </div>
   </div>

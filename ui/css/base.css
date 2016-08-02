@@ -48,6 +48,29 @@ body {
   font-size: 1em;
 }
 
+
+/* checkin-wrapper */
+
+#wrapper #checkin-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#wrapper #checkin-wrapper select {
+  width: 20em;
+  height: 100px;
+  text-align: center;
+  font-size: 1em;
+}
+
+#wrapper #checkin-wrapper button {
+  width: 10em;
+  height: 100px;
+  margin-left: 10px;
+  font-size: 1em;
+}
+
 /* reprint-wrapper */
 
 #wrapper #reprint-wrapper {
@@ -127,7 +150,7 @@ body {
 #wrapper #register-wrapper button {
   width: 100%;
   height: 75px;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 #wrapper #register-wrapper .error {
@@ -154,10 +177,18 @@ body {
   text-align: center;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .center-title {
   width: inhert;
   padding-bottom: 20px;
   font-size: 1.5em;
   font-weight: bold;
   text-align: center;
+}
+
+.form-inline {
+  display: inline-flex;
 }

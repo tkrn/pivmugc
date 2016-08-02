@@ -64,7 +64,7 @@ class Register {
       $f3->set('SESSION.message','Failed to Register! Please contact a volunteer!');
     }
 
-    $f3->reroute('/checkin');
+    $f3->reroute('/');
   }
 
 }

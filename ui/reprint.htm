@@ -1,13 +1,23 @@
 <div id="background"> </div>
   <div id="wrapper">
     <div id="reprint-wrapper">
-      <form action="/reprint" method="post">
-        <button type="submit" name="submit" value="print">Print</button>
-        <select id="users-drpdwn" name="id">
-          <repeat group="{{ @result }}" value="{{ @item }}">
-            <option value="{{ @item.id }}">{{ @item.lastname }}, {{ @item.firstname }} - {{ @item.company }}</option>
-          </repeat>
-        </select>
-      </form>
+      <check if="{{ @result }}">
+        <true>
+          <form action="/reprint" method="post">
+            <button type="submit" name="submit" value="print">Print</button>
+            <select id="users-drpdwn" name="id">
+              <repeat group="{{ @result }}" value="{{ @item }}">
+                <option value="{{ @item.id }}">{{ @item.lastname }}, {{ @item.firstname }} - {{ @item.company }}</option>
+              </repeat>
+            </select>
+          </form>
+        </true>
+        <false>
+          <div class="center bold">No one has checked in yet! Nothing to reprint!</div>
+        </false>
+      </check>
+    </div>
+    <div class="center">
+      <a href="/"> home </a>
     </div>
   </div>

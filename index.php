@@ -1,5 +1,5 @@
 <?php
-// PiVMUGc - Version 2.0
+// PiVMUGc - Version 2.1
 
 // Kickstart the framework
 $f3=require('lib/base.php');
@@ -13,8 +13,8 @@ $f3->config('config.ini');
 $f3->set('AUTOLOAD','app/');
 $f3->set('db', new DB\SQL('sqlite:'.$f3->DB_PATH));
 
-// redirect base / to /checkin
-$f3->route('GET /',function($f3){$f3->reroute('/checkin');});
+// base index landing page
+$f3->route('GET /','Index->DefaultDisplay');
 
 // checkin
 $f3->route('GET /checkin','Checkin->DefaultDisplay');
@@ -34,6 +34,7 @@ $f3->route('POST /admin/database/import','Admin->ImportDatabase');
 $f3->route('POST /admin/database/export','Admin->ExportDatabase');
 $f3->route('POST /admin/database/optimize','Admin->OptimizeDatabase');
 $f3->route('POST /admin/database/truncate','Admin->TruncateDatabase');
+$f3->route('POST /admin/shutdown','Admin->Shutdown');
 $f3->route('POST /admin/print/test','Admin->PrintTestLabel');
 
 // set error pages
