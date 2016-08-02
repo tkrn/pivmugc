@@ -58,7 +58,7 @@ class Admin {
   }
 
   function OptimizeDatabase($f3) {
-    $result = $f3->get('db')->exec('END TRANSACTION; VACUUM;');
+    $result = $f3->get('db')->exec('VACUUM guests;');
 
     if ($result > 0) {
       $f3->set('SESSION.message_type','success');
@@ -83,6 +83,10 @@ class Admin {
     }
 
     $f3->reroute('/admin');
+  }
+
+  function Shutdown($f3) {
+     $cmdout = shell_exec('sudo shutdown -h now');
   }
 
   function PrintTestLabel($f3) {
