@@ -49,7 +49,7 @@ For a manual installation, complete the following to create a RAM disk:
 
 > sudo mkdir /var/tmp
 
-> sudo echo 'tmpfs /var/tmp tmpfs nodev,nosuid,size=64M 0 0' >> /etc/fstab
+> sudo echo 'tmpfs /var/tmp tmpfs nodev,nosuid,size=96M 0 0' >> /etc/fstab
 
 > sudo mount -a
 
@@ -65,8 +65,8 @@ The following pages will allow to perform the following functions by URL.
 
 #### Included 3rd-party package versions:
 
-* FPDF - v1.8
+* FPDF - v1.81
 * PHPExcel - v1.8
-* jQuery - v2.1.4
-* jQuery Notification Plugin - v2.3.7
-* jQuery Validation Plugin - v1.14.0
+* jQuery - v3.1.0
+* jQuery Notification Plugin - v2.3.8
+* jQuery Validation Plugin - v1.15.0
