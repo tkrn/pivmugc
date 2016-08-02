@@ -1,0 +1,16 @@
+<div id="background"> </div>
+  <div id="wrapper">
+    <div id="checkin-wrapper">
+      <form action="/checkin" method="post" class="form-inline">
+        <select id="users-drpdwn" name="id">
+          <repeat group="{{ @result }}" value="{{ @item }}">
+            <option value="{{ @item.id }}">{{ @item.lastname }}, {{ @item.firstname }} - {{ @item.company }}</option>
+          </repeat>
+        </select> &nbsp;
+        <button type="submit" name="submit" value="checkin">Checkin</button>
+      </form>
+    </div>
+    <div class="center">
+      <a href="/"> home </a>
+    </div>
+  </div>
