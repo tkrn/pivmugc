@@ -3,9 +3,9 @@
 class Checkin {
 
   // define page specifics
-  private $title = 'Welcome to the VMUG Meetup! - PiVMUGc';
-  private $sqlcmd = 'SELECT * FROM view_pregistered_not_checked_in ORDER BY lastname COLLATE NOCASE';
-  private $content = 'index.htm';
+  private $title = 'Checkin - PiVMUGc';
+  private $sqlcmd = 'SELECT * FROM view_pregistered_not_checked_in';
+  private $content = 'checkin.htm';
   private $layout = 'layout-default.htm';
 
   function DefaultDisplay($f3) {
@@ -64,7 +64,7 @@ class Checkin {
       $f3->set('SESSION.message','Failed to Register! Please contact a volunteer!');
     }
 
-    $f3->reroute('/checkin');
+    $f3->reroute('/');
   }
 
 }

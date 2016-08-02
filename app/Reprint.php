@@ -4,7 +4,7 @@ class Reprint {
 
   // define page specifics
   private $title = 'Reprint Name Tag - PiVMUGc';
-  private $sqlcmd = 'SELECT * FROM view_all_checked_in ORDER BY lastname';
+  private $sqlcmd = 'SELECT * FROM view_all_checked_in';
   private $content = 'reprint.htm';
   private $layout = 'layout-default.htm';
 
