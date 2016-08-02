@@ -91,7 +91,7 @@ HOSTNAME=$(hostname)
 SUDOERS='ALL ALL=(root) NOPASSWD: /sbin/shutdown'
 
 echo
-echo -e "\x1B[01;93m PLEASE BE PATIENT! All items are run as a background process. \x1B[0m"
+echo -e "\x1B[01;93m PLEASE BE PATIENT! All items are ran as a background process. \x1B[0m"
 echo
 
 echo " *** Making RAM_DISK..."
@@ -183,11 +183,11 @@ service cups restart
 
 echo "*** Installing pivmugc application from github... "
 cd /var/tmp
-wget $PIVMUGCURL
-unzip master.zip
+wget $PIVMUGCURL -q
+unzip -qq master.zip 
 cd pivmugc-master/
-cp * /usr/local/nginx/html/
-rm /usr/local/nginx/html/pivmugc_installer.sh
+cp -rf * /usr/local/nginx/html/
+rm -f /usr/local/nginx/html/pivmugc_installer.sh
 chown www-data:www-data /usr/local/nginx/html/ -R
 
 echo " *** Cleanup RAM_DISK"
