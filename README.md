@@ -15,10 +15,16 @@ Start with a clean installation of Raspbian and issue the following commands:
 
 > sudo ./pivmugc_installer.sh
 
-This method will run apt-get update and install cups, nginx, php, compile Dymo drivers, configure most necessary services and create RAM_DISK a portion of memory used for writing tmp files to for better performance on the Rasberry Pi.
+This method will run apt-get update and install cups, nginx, php, compile Dymo
+drivers, configure most necessary services and create RAM_DISK a portion of
+memory used for writing tmp files to for better performance on the Raspberry Pi.
+
+[![pivmugc Installer Demo](https://i.vimeocdn.com/video/585003670.jpg?mw=900&mh=553)]https://vimeo.com/177562196)
 
 ### Installation Method #2 (Manual)
-Installation is simple. Download the latest master branch, extract the files and move the files into the web directory. Here is an example for a default NGINX web server. The paths will vary for lighttpd or Apache installations.
+Installation is simple. Download the latest master branch, extract the files
+and move the files into the web directory. Here is an example for a default
+NGINX web server. The paths will vary for lighttpd or Apache installations.
 
 > cd /tmp
 
@@ -28,11 +34,66 @@ Installation is simple. Download the latest master branch, extract the files and
 
 > cd pivmugc-master/
 
-> cp -rf * /usr/local/nginx/html/
+> sudo cp -rf * /usr/local/nginx/html/
 
-> chown www-data:www-data /usr/local/nginx/html/ -R
+> sudo chown www-data:www-data /usr/local/nginx/html/ -R
 
-### config.ini
+For a manual installation of the RAM_DISK:
+
+> sudo mkdir /var/tmp
+
+> sudo echo 'tmpfs /var/tmp tmpfs nodev,nosuid,size=96M 0 0' >> /etc/fstab
+
+> sudo mount -a
+
+### Post Installation Printer Configuration
+
+Upon the Dymo driver installation, the printer must be added to the CUPS daemon
+and set as the default printer for the system for use by the pivmugc
+application.
+
+Browse to the CUPS web interface for configuration:
+
+> https://<hostname/ip address>:631/admin
+
+> Click on "Add Printer"
+
+> Click on the printer under "Local Printers"
+
+> Press "Continue"
+
+> Press "Add Printer"
+
+> Change the "Media Size" to "99014 Name Badge Label"
+
+> Change the "Output Resolution" to the highest possible.
+
+> Change "Print Density" to "Dark"
+
+> Change "Print Quality" to "Barcodes and Graphics"
+
+> Press "Set Default Options"
+
+> Click on the Printer name
+
+> Under the "Administration" drop down, click on "Set As Server Default"
+
+[![pivmugc Front End Demo](https://i.vimeocdn.com/video/585527347.jpg?mw=900&mh=602)]https://vimeo.com/178011036)
+
+### Usage
+The following pages will allow to perform the following functions by URL.
+
+* / - Default landing page.
+* /checkin - Allows checkin of preregistered guests.
+* /register - Allows for walk-in guests to register.
+* /reprint - Reprint name tags for those who are already checked in.
+* /admin - Administration functions for pivmugc. Import/export data.
+
+        Default Administration Credentials: admin/pivmugc
+
+[![pivmugc Front End Demo](https://i.vimeocdn.com/video/585008900.jpg?mw=800&mh=603)]https://vimeo.com/177565807)
+
+#### config.ini
 A file that stores global variables.
 
 ###### DB_PATH
@@ -44,30 +105,14 @@ in the ui/images folder in the directory structure. The image will automatically
 be resized but it is recommended to keep the logo less than 200px by 200px.
 
 ###### RAM_DISK
-RAM_DISK is likely one of the most import variables in this configuration. On
-most system /tmp is generally a location on the filesystem. Due to the
-RaspberryPi nature, /tmp is on an SDcard by default. Because of this, the SDcard
-introduces an increase in write response time. To help mitigate temporary files
-creation, we'll create a small temporary filesytem out of RAM for a better
-response time.
-
-For a manual installation, complete the following to create a RAM disk:
-
-> sudo mkdir /var/tmp
-
-> sudo echo 'tmpfs /var/tmp tmpfs nodev,nosuid,size=96M 0 0' >> /etc/fstab
-
-> sudo mount -a
-
-### Usage
-The following pages will allow to perform the following functions by URL.
-
-* /checkin - Default homepage. Allows checkin of preregistered guests.
-* /register - Allows for walk-in guests to register.
-* /reprint - Reprint name tags for those who are already checked in.
-* /admin - Administration functions for pivmugc. Import/export data.
-
-        Default Administration Credentials: admin/pivmugc
+RAM_DISK is likely one of the most import components to increase the speed of
+the Raspberry Pi. On unix-based systems, /tmp is a location on the filesystem
+that resides on hard drive. Due to the Raspberry Pi nature,/tmp is on an SDcard
+by default. Because of this, the SDcard introduces increased response times. To
+help performance during use temporary files creation, the system will write to
+temporary filesytem that is carved out of RAM for better response times. This is
+automatically created in the installation script or see the manual installation
+for RAM_DISK creation above.
 
 #### Included 3rd-party package versions:
 
