@@ -6,7 +6,7 @@ chapter of the VMware User Group (VMUG). pivmugc is written in the Fat-Free
 Framework and was designed to be used on a Raspberry Pi. Although pivmugc can
 be used with any type of web server.  
 
-[![pivmugc Front End Demo](https://i.vimeocdn.com/video/585008900.jpg?mw=800&mh=603)](https://vimeo.com/177565807)
+[![pivmugc Front End Demo](https://s10.postimg.org/9pghci2c9/pi_frontend_demo_screenshot.jpg)](https://vimeo.com/177565807)
 
 ### Installation Method #1 (Script)
 Start with a clean installation of Raspbian and issue the following commands:
@@ -21,7 +21,7 @@ This method will run apt-get update and install cups, nginx, php, compile Dymo
 drivers, configure most necessary services and create RAM_DISK a portion of
 memory used for writing tmp files to for better performance on the Raspberry Pi.
 
-[![pivmugc Installer Demo](https://i.vimeocdn.com/video/585003670.jpg?mw=900&mh=553)](https://vimeo.com/177562196)
+[![pivmugc Installer Demo](https://s10.postimg.org/vd5fmy2qh/pi_installer_screenshot.jpg)](https://vimeo.com/177562196)
 
 ### Installation Method #2 (Manual)
 Installation is simple. Download the latest master branch, extract the files
@@ -56,7 +56,7 @@ application.
 
 Browse to the CUPS web interface for configuration:
 
-> https://<hostname/ip address>:631/admin
+> https://raspberrypi:631/admin
 
 > Click on "Add Printer"
 
@@ -80,7 +80,7 @@ Browse to the CUPS web interface for configuration:
 
 > Under the "Administration" drop down, click on "Set As Server Default"
 
-[![pivmugc Front End Demo](https://i.vimeocdn.com/video/585527347.jpg?mw=900&mh=602)](https://vimeo.com/178011036)
+[![pivmugc Post Installation Printer Configuration](https://s10.postimg.org/k22rykvvd/pi_post_install_screenshot.jpg)](https://vimeo.com/178011036)
 
 ### Usage
 The following pages will allow to perform the following functions by URL.
@@ -93,7 +93,7 @@ The following pages will allow to perform the following functions by URL.
 
         Default Administration Credentials: admin/pivmugc
 
-[![pivmugc Basic Administration Demo](https://i.vimeocdn.com/video/585005405.jpg?mw=800&mh=601)](https://vimeo.com/177564587)
+[![pivmugc Basic Administration Demo](https://s10.postimg.org/wpn4ou061/pi_basic_administration_scr.jpg)](https://vimeo.com/177564587)
 
 #### config.ini
 A file that stores global variables.
