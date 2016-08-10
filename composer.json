@@ -1,18 +1,11 @@
 {
-	"name": "bcosca/fatfree",
-	"description": "A powerful yet easy-to-use PHP micro-framework designed to help you build dynamic and robust Web applications - fast!",
-	"homepage": "http://fatfreeframework.com/",
-	"license": "GPL-3.0",
+	"name": "tkrn/pivmugc",
+	"description": "pivmugc provides web-based checkin functionality that was designed for a local chapter of the VMware User Group (VMUG). pivmugc is written in the Fat-Free Framework and was designed to be used on a Raspberry Pi. Although pivmugc can be used with any type of web server.",
+	"homepage": "https://github.com/tkrn/pivmugc/",
 	"require": {
-		"php": ">=5.3.6"
-	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/bcosca/fatfree"
-		}
-	],
-	"autoload": {
-		"files": ["lib/base.php"]
+		"php": ">=5.3.6",
+		"setasign/fpdf": "1.8.1",
+		"phpoffice/phpexcel": "1.8.1",
+		"bcosca/fatfree": "3.5.1"
 	}
 }
