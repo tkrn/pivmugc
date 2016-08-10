@@ -35,6 +35,7 @@ $f3->route('POST /reprint','Reprint->ProcessPOST');
 $f3->route('GET /admin','Admin->DefaultDisplay');
 $f3->route('POST /admin/database/import','Admin->ImportDatabase');
 $f3->route('POST /admin/database/export','Admin->ExportDatabase');
+$f3->route('POST /admin/random/name','Admin->RandomName');
 $f3->route('POST /admin/database/optimize','Admin->OptimizeDatabase');
 $f3->route('POST /admin/database/truncate','Admin->TruncateDatabase');
 $f3->route('POST /admin/shutdown','Admin->Shutdown');
