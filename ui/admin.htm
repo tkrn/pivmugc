@@ -3,6 +3,11 @@
   <div id="admin-wrapper">
     <div class="center-title">{{ @title }}</div>
     <div>
+      <form action="/admin/random/name" method="post">
+        <button type="submit" name="submit" value="random_name">Select Random Name</button>
+      </form>
+    </div>
+    <div>
       <form action="/admin/database/import" enctype="multipart/form-data" method="post">
         <input name="file" type="file" />
         <button type="submit" name="submit" value="database_import">Database Import</button>

@@ -51,6 +51,13 @@ class Admin {
 
     $f3->reroute('/admin');
   }
+  function RandomName($f3) {
+      // get the checked in user information
+      $result = $f3->get('db')->exec('SELECT * FROM guests WHERE timestamp NOT NULL ORDER BY Random()  LIMIT 1')[0];
+      $f3->set('SESSION.message_type','success');
+      $f3->set('SESSION.message',$result['firstname'].' '.$result['lastname'].' from: '.$result['company']);
+      $f3->reroute('/admin');
+  }
 
   function ExportDatabase($f3) {
     $ExcelExporter = new ExcelUtility();

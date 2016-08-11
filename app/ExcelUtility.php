@@ -2,15 +2,7 @@
 
 // define ExcelFunctions class
 class ExcelUtility {
-
-  // instantiate class
-  function __construct() {
-
-    // include PHPExcel
-    include 'opt/PHPExcel.php';
-
-  }
-
+  
   function ExportDatabase() {
 
     // get base instance
