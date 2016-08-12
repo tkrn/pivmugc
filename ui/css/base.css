@@ -7,7 +7,7 @@ body {
   height: inherit;
   width: inherit;
   opacity: 0.25;
-  background-image: url("/ui/images/vmug-people.png");
+  background-image: url("../../ui/images/vmug-people.png");
   background-position: center bottom;
   background-repeat: no-repeat;
 }
