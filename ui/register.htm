@@ -2,7 +2,7 @@
   <div id="wrapper">
     <div id="register-wrapper">
       <div class="center-title">Walk-on Registration</div>
-        <form id="register-form" action="/register" method="post">
+        <form id="register-form" action="register" method="post">
           <label for="firstname">First Name: <input type="text" name="firstname" /></label>
           <label for="lastname">Last Name: <input type="text" name="lastname" /></label>
           <label for="email">Email Address: <input type="text" name="email" /></label>
@@ -15,7 +15,7 @@
           <button type="submit" id="register-btn" name="submit" value="register">Register</button>
         </form>
       <div class="center">
-        <a href="/"> home </a>
+        <a href="{{ @baseurl }}"> home </a>
       </div>
     </div>
   </div>

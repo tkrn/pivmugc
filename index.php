@@ -6,6 +6,7 @@ require('vendor/autoload.php');
 
 // Kickstart the framework
 $f3= Base::instance();
+$f3->set('baseurl',$f3->get('BASE'));
 
 $f3->set('DEBUG',1);
 if ((float)PCRE_VERSION<7.9) {

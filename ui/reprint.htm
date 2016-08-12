@@ -3,7 +3,7 @@
     <div id="reprint-wrapper">
       <check if="{{ @result }}">
         <true>
-          <form action="/reprint" method="post">
+          <form action="reprint" method="post">
             <button type="submit" name="submit" value="print">Print</button>
             <select id="users-drpdwn" name="id">
               <repeat group="{{ @result }}" value="{{ @item }}">
@@ -18,6 +18,6 @@
       </check>
     </div>
     <div class="center">
-      <a href="/"> home </a>
+      <a href="{{ @baseurl }}"> home </a>
     </div>
   </div>
