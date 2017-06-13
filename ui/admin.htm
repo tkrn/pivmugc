@@ -24,11 +24,6 @@
       </form>
     </div>
     <div>
-      <form action="admin/database/optimize" method="post">
-        <button type="submit" name="submit" value="database_optimize">Database Optimize</button>
-      </form>
-    </div>
-    <div>
       <form action="admin/shutdown" method="post" onSubmit="if(!confirm('Are you sure you want to shutdown?')){return false;}">
         <button type="submit" name="submit" value="shutdown">Shutdown</button>
       </form>
@@ -39,7 +34,7 @@
       </form>
     </div>
     <div class="center">
-      <a href="http://{{ @host }}:631/admin"> CUPS Administraton </a>
+      <a href="https://{{ @IP }}:631/admin"> CUPS Administraton </a>
       <br/><br/>
       <a href="/{{ @home }}"> home </a>
     </div>
