@@ -106,7 +106,7 @@ echo " *** Running 'apt-get update'... "
 apt-get -qq update -y
 
 echo " *** Installing required binaries... "
-apt-get -qq install lpr cups libcups2 libcupsimage2 sendmail -y > /var/tmp/apt-get-install-binaries-1.log
+apt-get -qq install lpr cups libcups2 libcupsimage2 sendmail locate -y > /var/tmp/apt-get-install-binaries-1.log
 
 echo " *** Installing required binaries... "
 apt-get -qq install nginx php5-fpm php5-sqlite -y > /var/tmp/apt-get-install-binaries-2.log
@@ -138,7 +138,8 @@ echo $DHCLIENT_CONF >> /etc/dhcp/dhclient.conf
 
 echo " *** Configuring interfaces..."
 mv /etc/dhcpcd.conf /etc/dhcpcd.conf.bak
-echo -e $DHCPCD >>/etc/dhcpcd.conf
+echo "wireless-power off" > /etc/network/interfaces.d/wlan0
+echo -e $DHCPCD >> /etc/dhcpcd.conf
 num=$(wc -l /etc/rc.local |awk '{print $1}')
 head -n $(expr $num - 1) /etc/rc.local > /etc/rc.local.new
 echo "ifup wlan0" >> /etc/rc.local.new
