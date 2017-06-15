@@ -1,0 +1,55 @@
+<div id="background"> </div>
+  <div id="wrapper">
+    <div id="report-wrapper">
+      <check if="{{ @guests }}">
+        <true>
+
+          <table id="stats-tbl">
+            <tr>
+              <td><strong>PreRegistered Checked In</strong></td>
+              <td><strong>PreRegistered Not Checked</strong></td>
+              <td><strong>PreRegistered</strong></td>
+              <td><strong>Walkon Checked In</strong></td>
+              <td><strong>Total Guests</strong></td>
+            </tr>
+            <repeat group="{{ @stats }}" value="{{ @item }}">
+              <tr>
+                <td>{{ @item.PreRegisteredCheckedInCount }}</td>
+                <td>{{ @item.PreRegisteredNotCheckedInCount }}</td>
+                <td>{{ @item.PreRegisteredCount }}</td>
+                <td>{{ @item.WalkonCheckedInCount }}</td>
+                <td>{{ @item.TotalGuests }}</td>
+              </tr>
+            </repeat>
+          </table>
+
+          <table id="report-tbl">
+            <tr>
+              <td><strong>Last Name</strong></td>
+              <td><strong>First Name</strong></td>
+              <td><strong>Company</strong></td>
+              <td><strong>Preregistered</strong></td>
+              <td><strong>Checked In</strong></td>
+            </tr>
+
+            <repeat group="{{ @guests }}" value="{{ @item }}">
+              <tr>
+                <td>{{ @item.lastname }}</td>
+                <td>{{ @item.firstname }}</td>
+                <td>{{ @item.company }}</td>
+                <td><check if="{{ @item.pre_registration=='1' }}"><true>True</true><false>False</false></check></td>
+                <td><check if="{{ @item.timestamp!='' }}"><true>True</true><false>False</false></check></td>
+              </tr>
+            </repeat>
+
+          </table>
+        </true>
+        <false>
+          <div class="center bold">Nothing to report!</div>
+        </false>
+      </check>
+    </div>
+    <div class="center">
+      <a href="{{ @BASE }}"> home </a>
+    </div>
+  </div>

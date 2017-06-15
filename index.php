@@ -1,5 +1,5 @@
 <?php
-// PiVMUGc - Version 2.1.1
+// PiVMUGc - Version 2.2
 
 // Load 3rd party dependencies
 require('vendor/autoload.php');
@@ -32,8 +32,12 @@ $f3->route('POST /register','Register->ProcessPOST');
 $f3->route('GET /reprint','Reprint->DefaultDisplay');
 $f3->route('POST /reprint','Reprint->ProcessPOST');
 
+// report
+
+
 // admin
 $f3->route('GET /admin','Admin->DefaultDisplay');
+$f3->route('GET /admin/report','Report->DefaultDisplay');
 $f3->route('POST /admin/database/import','Admin->ImportDatabase');
 $f3->route('POST /admin/database/export','Admin->ExportDatabase');
 $f3->route('POST /admin/random/name','Admin->RandomName');

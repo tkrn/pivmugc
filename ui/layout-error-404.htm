@@ -1,11 +1,11 @@
 <html>
 <head>
   <title>{{@ERROR.text}}</title>
-  <link rel="stylesheet" href="ui/css/base.css" type="text/css" />
+  <link rel="stylesheet" href="{{@BASE}}/ui/css/base.css" type="text/css" />
 </head>
 <body>
   <center>
-    <img src="ui/images/keen-goodbye.png" />
+    <img src="{{@BASE}}/ui/images/keen-goodbye.png" />
     <h1>HTTP {{@ERROR.code}}</h1>
     <p>File not found</p><br/>
     <a href="javascript:history.go(-1)" title="Return to previous page">Go back!</a>

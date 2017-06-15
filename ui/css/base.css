@@ -171,6 +171,29 @@ body {
   text-align: center;
 }
 
+/* report */
+
+#report-wrapper {
+  margin-bottom: 15px;
+}
+
+#report-tbl, #stats-tbl {
+  border-collapse:collapse;
+  border:1px solid #000;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#report-tbl td, #stats-tbl td {
+  border:1px solid #000;
+  padding: 5px;
+}
+
+#stats-tbl {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
 /* other */
 
 .center {
@@ -191,4 +214,8 @@ body {
 
 .form-inline {
   display: inline-flex;
+}
+
+.noty-text {
+  font-size: 1.5em;
 }

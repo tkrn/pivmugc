@@ -8,7 +8,7 @@ be used with any type of web server.
 
 [![pivmugc Front End Demo](https://s10.postimg.org/9pghci2c9/pi_frontend_demo_screenshot.jpg)](https://vimeo.com/177565807)
 
-### Installation Method #1 (Script)
+### Installation Method #1 (Script + Recommended)
 Start with a clean installation of Raspbian and issue the following commands:
 
 > wget https://raw.githubusercontent.com/tkrn/pivmugc/master/pivmugc_installer.sh

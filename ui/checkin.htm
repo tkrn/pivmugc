@@ -3,7 +3,7 @@
   <div id="checkin-wrapper">
     <form action="checkin" method="post" class="form-inline">
       <div>
-        <script src="ui/js/select2.full.min.js"></script>
+        <script src="{{@BASE}}/ui/js/select2.full.min.js"></script>
         <script type="text/javascript">
           $(document).ready(function() {
             $(".searchable").select2({
@@ -26,6 +26,6 @@
     </form>
   </div>
   <div class="center">
-    <a href="/{{ @home }}"> home </a>
+    <a href="{{ @BASE }}"> home </a>
   </div>
 </div>

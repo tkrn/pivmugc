@@ -51,7 +51,7 @@ class Admin {
 
     $f3->reroute('/admin');
   }
-  
+
   function RandomName($f3) {
       // get the checked in user information
       $result = $f3->get('db')->exec('SELECT * FROM guests WHERE timestamp NOT NULL ORDER BY Random()  LIMIT 1')[0];
@@ -80,7 +80,8 @@ class Admin {
   }
 
   function Shutdown($f3) {
-     $cmdout = shell_exec('sudo shutdown -h now');
+    echo \Template::instance()->render('shutdown.htm');
+    $cmdout = shell_exec('sudo shutdown -h now');
   }
 
   function PrintTestLabel($f3) {
