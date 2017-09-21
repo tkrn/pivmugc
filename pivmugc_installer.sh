@@ -3,8 +3,9 @@
 #
 # Raspberry Pi User Group Controller Scirpt Installer
 # URL: https://github.com/tkrn/pivmugc/
-# Release Date: 2016-05-27
-# Verion: 2.1
+# Release Date: 2017-09-21
+# Verion: 2.2
+# Release Notes: Updated for Raspbian Stretch  
 
 #
 # Start Variables
@@ -83,8 +84,8 @@ NGINX_CONF='server {
 }'
 
 HOSTNAME=$(hostname)
-INTERFACES='# interfaces(5) file used by ifup(8) and ifdown(8)\n\n# Please note that this file is written to be used with dhcpcd\n# For static IP, consult /etc/dhcpcd.conf and "man dhcpcd.conf"\n\n# Include files from /etc/network/interfaces.d:\nsource-directory /etc/network/interfaces.d\n\nauto lo\niface lo inet loopback\n\niface eth0 inet manual\n\niface wlan0 inet static\naddress 10.0.0.1\nnetwork 10.0.0.0\nnetmask 255.255.255.0\nbroadcast 10.0.0.255'
 DHCPCD='\n#WLAN0 Configuration\n\ninterface wlan0\nstatic ip_address=10.0.0.1/24\nstatic routers=10.0.0.1\nstatic domain_name_servers=10.0.0.1'
+WLAN0_INT='iface wlan0 inet static\naddress 10.0.0.1\nnetwork 10.0.0.0\nnetmask 255.255.255.0\nbroadcast 10.0.0.255\nwireless-power off'
 WLAN0_CONF='interface=wlan0\nexpand-hosts\ndomain=local\ndhcp-range=10.0.0.10,10.0.0.50,24h\ndhcp-option=6,10.0.0.1'
 HOSTAPD_CONF='# Basic configuration\ndriver=nl80211\ninterface=wlan0\nssid=pivmugc\nhw_mode=g\nchannel=8\nauth_algs=1\n\n# WPA configuration\nwpa=2\nwpa_passphrase=PIVMUGCPASS\nwpa_key_mgmt=WPA-PSK\nwpa_pairwise=TKIP\nrsn_pairwise=CCMP\nwpa_ptk_rekey=600\nmacaddr_acl=0'
 HOSTAPD_DEFAULT='DAEMON_CONF="/etc/hostapd/hostapd.conf"'
@@ -102,8 +103,8 @@ fi
 echo 'tmpfs /var/tmp tmpfs nodev,nosuid,size=96M 0 0' >> /etc/fstab
 mount -a
 
-echo " *** Running 'apt-get update'... "
-apt-get -qq update -y
+#echo " *** Running 'apt-get update'... "
+#apt-get -qq update -y
 
 echo " *** Installing required binaries... "
 apt-get -qq install lpr cups libcups2 libcupsimage2 sendmail locate -y > /var/tmp/apt-get-install-binaries-1.log
@@ -138,7 +139,7 @@ echo $DHCLIENT_CONF >> /etc/dhcp/dhclient.conf
 
 echo " *** Configuring interfaces..."
 mv /etc/dhcpcd.conf /etc/dhcpcd.conf.bak
-echo "wireless-power off" > /etc/network/interfaces.d/wlan0
+echo -e $WLAN0_INT > /etc/network/interfaces.d/wlan0
 echo -e $DHCPCD >> /etc/dhcpcd.conf
 num=$(wc -l /etc/rc.local |awk '{print $1}')
 head -n $(expr $num - 1) /etc/rc.local > /etc/rc.local.new
@@ -147,9 +148,7 @@ tail -n 1 /etc/rc.local >> /etc/rc.local.new
 mv /etc/rc.local /etc/rc.local.bak
 mv /etc/rc.local.new /etc/rc.local
 echo "10.0.0.1" $HOSTNAME $HOSTNAME".local" >> /etc/hosts
-systemctl reload networking.service
-ifdown wlan0 > /dev/null
-ifup wlan0 > /dev/null
+/etc/init.d/networking restart 
 
 echo " *** Configuring dnsmasq..."
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
@@ -170,7 +169,8 @@ echo " *** Extracting Dymo source files... "
 tar -xf dymo-cups-drivers-* > /var/tmp/dymo-source-extract.log
 
 echo " *** Running configure on Dymo drivers... "
-cd dymo-cups-drivers-*
+DYMOEXTPATH=$(find /var/tmp -name "dymo*" -type d -print)
+cd $DYMOEXTPATH
 ./configure > /var/tmp/dymo-configure.log 2>&1
 
 echo " *** Running make on Dymo drivers... "
