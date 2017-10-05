@@ -4,14 +4,14 @@
 # Raspberry Pi User Group Controller Scirpt Installer
 # URL: https://github.com/tkrn/pivmugc/
 # Release Date: 2017-09-21
-# Verion: 2.2
-# Release Notes: Updated for Raspbian Stretch  
+# Verion: 2.3
+# 2.3 Release Notes: Removed compiling component, installing dymo drivers via apt-get
+# 2.2 Release Notes: Updated for Raspbian Stretch  
 
 #
 # Start Variables
 #
 
-DYMOURL="http://download.dymo.com/Software/Linux/dymo-cups-drivers-1.4.0.tar.gz"
 PIVMUGCURL="https://github.com/tkrn/pivmugc/archive/master.zip"
 
 #
@@ -103,20 +103,14 @@ fi
 echo 'tmpfs /var/tmp tmpfs nodev,nosuid,size=96M 0 0' >> /etc/fstab
 mount -a
 
-#echo " *** Running 'apt-get update'... "
-#apt-get -qq update -y
-
 echo " *** Installing required binaries... "
 apt-get -qq install lpr cups libcups2 libcupsimage2 sendmail locate -y > /var/tmp/apt-get-install-binaries-1.log
 
 echo " *** Installing required binaries... "
-apt-get -qq install nginx php5-fpm php5-sqlite -y > /var/tmp/apt-get-install-binaries-2.log
+apt-get -qq install nginx php5-fpm php5-sqlite printer-driver-dymo -y > /var/tmp/apt-get-install-binaries-2.log
 
 echo " *** Installing required binaries... "
 apt-get -qq install unzip dnsmasq vim unzip hostapd gawk -y > /var/tmp/apt-get-install-binaries-3.log
-
-echo " *** Installing development tools... "
-apt-get -qq install build-essential libcups2-dev libcupsimage2-dev -y > /var/tmp/apt-get-install-devel.log
 
 echo " *** Modifying sudoers permissions... "
 echo $SUDOERS >> /etc/sudoers
@@ -160,24 +154,6 @@ mv /etc/default/hostapd /etc/default/hostapd.bak
 echo -e $HOSTAPD_CONF > /etc/hostapd/hostapd.conf
 echo $HOSTAPD_DEFAULT >> /etc/default/hostapd
 systemctl restart hostapd.service
-
-echo " *** Downloading Dymo drivers... "
-cd /var/tmp
-wget $DYMOURL -q
-
-echo " *** Extracting Dymo source files... "
-tar -xf dymo-cups-drivers-* > /var/tmp/dymo-source-extract.log
-
-echo " *** Running configure on Dymo drivers... "
-DYMOEXTPATH=$(find /var/tmp -name "dymo*" -type d -print)
-cd $DYMOEXTPATH
-./configure > /var/tmp/dymo-configure.log 2>&1
-
-echo " *** Running make on Dymo drivers... "
-make > /var/tmp/dymo-make.log 2>&1
-
-echo " *** Running make install on Dymo dsrivers... "
-make install > /var/tmp/dymo-make-install.log 2>&1
 
 echo " *** Configuring CUPS..."
 cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.bak
