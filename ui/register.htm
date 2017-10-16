@@ -2,20 +2,20 @@
   <div id="wrapper">
     <div id="register-wrapper">
       <div class="center-title">Walk-on Registration</div>
-        <form id="register-form" action="/register" method="post">
+        <form id="register-form" action="register" method="post">
           <label for="firstname">First Name: <input type="text" name="firstname" /></label>
           <label for="lastname">Last Name: <input type="text" name="lastname" /></label>
           <label for="email">Email Address: <input type="text" name="email" /></label>
           <label for="company">Company: <input type="text" name="company" /></label>
           <div id="radio-buttons">
-            <input type="radio" name="company_type" value="1" checked> Customer &nbsp;
-            <input type="radio" name="company_type" value="2"> VMware Partner &nbsp;
-            <input type="radio" name="company_type" value="3"> Other Vendor
+            <input type="radio" name="company_type" value="1" checked> Customer <br/> <br/>
+            <input type="radio" name="company_type" value="2"> VMware/VMware Partner &nbsp;
+            <input type="radio" name="company_type" value="3"> OEM/Vendor
           </div>
           <button type="submit" id="register-btn" name="submit" value="register">Register</button>
         </form>
-      <div class="center">
-        <a href="/"> home </a>
-      </div>
+    </div>
+    <div class="center">
+      <a href="{{ @BASE }}/"> home </a>
     </div>
   </div>

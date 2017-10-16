@@ -1,13 +1,17 @@
 <?php
-// PiVMUGc - Version 2.1
+// PiVMUGc - Version 2.2
+
+// Load 3rd party dependencies
+require('vendor/autoload.php');
 
 // Kickstart the framework
-$f3=require('lib/base.php');
+$f3= Base::instance();
+$f3->set('baseurl',$f3->get('BASE'));
 
 $f3->set('DEBUG',1);
-if ((float)PCRE_VERSION<7.9)
+if ((float)PCRE_VERSION<7.9) {
 	trigger_error('PCRE version is out of date');
-
+}
 // load configuration
 $f3->config('config.ini');
 $f3->set('AUTOLOAD','app/');
@@ -28,11 +32,15 @@ $f3->route('POST /register','Register->ProcessPOST');
 $f3->route('GET /reprint','Reprint->DefaultDisplay');
 $f3->route('POST /reprint','Reprint->ProcessPOST');
 
+// report
+
+
 // admin
 $f3->route('GET /admin','Admin->DefaultDisplay');
+$f3->route('GET /admin/report','Report->DefaultDisplay');
 $f3->route('POST /admin/database/import','Admin->ImportDatabase');
 $f3->route('POST /admin/database/export','Admin->ExportDatabase');
-$f3->route('POST /admin/database/optimize','Admin->OptimizeDatabase');
+$f3->route('POST /admin/random/name','Admin->RandomName');
 $f3->route('POST /admin/database/truncate','Admin->TruncateDatabase');
 $f3->route('POST /admin/shutdown','Admin->Shutdown');
 $f3->route('POST /admin/print/test','Admin->PrintTestLabel');

@@ -52,23 +52,17 @@ class Admin {
     $f3->reroute('/admin');
   }
 
+  function RandomName($f3) {
+      // get the checked in user information
+      $result = $f3->get('db')->exec('SELECT * FROM guests WHERE timestamp NOT NULL ORDER BY Random()  LIMIT 1')[0];
+      $f3->set('SESSION.message_type','success');
+      $f3->set('SESSION.message',$result['firstname'].' '.$result['lastname'].' from: '.$result['company']);
+      $f3->reroute('/admin');
+  }
+
   function ExportDatabase($f3) {
     $ExcelExporter = new ExcelUtility();
     $ExcelExporter->ExportDatabase();
-  }
-
-  function OptimizeDatabase($f3) {
-    $result = $f3->get('db')->exec('VACUUM guests;');
-
-    if ($result > 0) {
-      $f3->set('SESSION.message_type','success');
-      $f3->set('SESSION.message','Successful database optimization');
-    } else {
-      $f3->set('SESSION.message_type','failure');
-      $f3->set('SESSION.message','Failure to optimizate database! Big time unknown error! Cleveland, we have a problem!');
-    }
-
-    $f3->reroute('/admin');
   }
 
   function TruncateDatabase($f3) {
@@ -86,7 +80,8 @@ class Admin {
   }
 
   function Shutdown($f3) {
-     $cmdout = shell_exec('sudo shutdown -h now');
+    echo \Template::instance()->render('shutdown.htm');
+    $cmdout = shell_exec('sudo shutdown -h now');
   }
 
   function PrintTestLabel($f3) {

@@ -3,21 +3,13 @@
 // define LabelPrinter class
 class LabelPrinter {
 
-  // instantiate class
-  function __construct() {
-
-    // include fpdf
-    include 'opt/fpdf/fpdf.php';
-
-  }
-
   function PrintNameTagLabel($name, $company) {
 
     // get base instance
     $f3 = Base::instance();
 
-    // create pdf obj with 2.25" x 4" dimensions
-    $pdf = new fpdf('L','pt',array(162,288));
+      // create pdf obj with 2.25" x 4" dimensions
+    $pdf = new FPDF('L','pt',array(162,288));
 
 		$pdf->AddPage(); // add a page to the pdf obj
 		$pdf->SetFont('Arial','B',22); // name font style
@@ -32,6 +24,7 @@ class LabelPrinter {
 
     // specify pdf location, ideally a tmpfs filesystem in ram for the RPi to
     // prevent writes to the sdcard and better performance
+
     $pdf_fullpath = $f3->RAM_DISK . '/' . md5(spl_object_hash($pdf)) . '.pdf';
 
     $pdf->Output($pdf_fullpath, 'F'); // write the pdf
