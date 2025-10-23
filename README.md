@@ -1,3 +1,6 @@
+# Inactive Project
+It's been a long time since I've been involved in VMUG. There hasn't been an update for years. Making this repo read-only for reference purposes only.
+
 ## Raspberry Pi VMUG Controller (pivmugc)
 
 ### Description
